@@ -1497,6 +1497,18 @@ More on CloudFront [here](https://aws.amazon.com/cloudfront)
   * Origin
   * Edge location
   * Distribution</summary><br><b>
+
+  | Concept |  Meaning | Example  |
+|-----------|-----------|-----------|
+| Origin  | The original content source  | S3, EC2, on-prem server  |
+| Edge Location  | A caching server closer to users | AWS data center in London caching an image  |
+| Distribution	  | The CloudFront setup linking origin & edge locations | A web distribution serving website content globally  |
+
+Summary:
+1. Origin → Where the content is stored.
+2. Edge Location → Where content is cached for fast delivery.
+3. Distribution → The CloudFront setup managing the content delivery.
+   
 </b></details>
 
 <details>
