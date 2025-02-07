@@ -165,10 +165,19 @@ git merge main
 </b></details>
 
 <details>
-<summary>Describe shortly what happens behind the scenes when you run <code>git branch <BRANCH></code></summary><br><b>
+<summary>Describe shortly what happens behind the scenes when you run <code>git branch <BRANCH></code></summary><br><b> </b>
 
-Git runs update-ref to add the SHA-1 of the last commit of the branch you're on into the new branch you would like to create
-</b></details>
+When you run git branch <branch-name>, Git does the following behind the scenes:
+
+**Creates a new branch** – Git records a new branch name in the repository.
+
+**Points it to the current commit** – The new branch is just a pointer (reference) to the same commit where your current branch is.
+
+**Does NOT switch branches** – It only creates the branch but does not move you to it (you stay on the current branch).
+
+To switch to the new branch, you need to run git checkout ```<branch-name>``` or git switch ```<branch-name>```.
+
+</details>
 
 <details>
 <summary>When you run <code>git branch <BRANCH></code> how does Git know the SHA-1 of the last commit?</summary><br><b>
