@@ -270,17 +270,25 @@ This is a great article about Octopus merge: http://www.freblogg.com/2016/12/git
 </b></details>
 
 <details>
-<summary>What is the difference between <code>git reset</code> and <code>git revert</code>?</summary><br><b>
+<summary>What is the difference between <code>git reset</code> and <code>git revert</code>?</summary><br><b></b>
 
 <p>
+Both git reset and git revert are used to undo changes, but they work differently:
+	
+1. **git reset (Rewrites History)**
 
-`git revert` creates a new commit which undoes the changes from last commit.
+Moves the branch pointer backward to an earlier commit, removing commits.
 
-`git reset` depends on the usage, can modify the index or change the commit which the branch head
-is currently pointing at.
+Can modify the commit history, making it dangerous for shared branches.
+
+2. **git revert (Safe, Creates a New Commit)**
+   
+Instead of removing commits, it creates a new commit that undoes the changes.
+
+Does not rewrite history, making it safe for shared branches.
 
 </p>
-</b></details>
+</details>
 
 ### Rebase
 
