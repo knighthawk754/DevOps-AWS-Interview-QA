@@ -112,6 +112,28 @@ Finally, with certain build systems, you can know which files are being used/rel
 ### Branches
 
 <details>
+<summary>What's is the branch strategy?</summary><br><b>
+</b>
+A branching strategy is a set of rules that define how branches are created, merged, and managed in a Git repository. It helps teams collaborate efficiently and maintain code quality.
+
+### Common Branching Strategies:
+1. Main Branching (Single Branch)
+2. Feature Branching
+3. Git Flow (Most Popular for Teams)
+    Uses multiple branches:
+	main (stable production code)
+	develop (active development)
+	feature (new features)
+	release (testing before release)
+	hotfix (quick fixes for production issues)
+4. GitHub Flow (Simpler than Git Flow)
+5. Trunk-Based Development
+   All developers commit directly or via short-lived branches to main. Suitable for continuous integration and rapid 
+    releases.
+
+</details>
+
+<details>
 <summary>What's is the branch strategy (flow) you know?</summary><br><b>
 
 - Git flow
