@@ -927,7 +927,7 @@ Use Elastic IP which provides you a fixed IP address.
 <details>
 <summary>When creating a new VPC, there is an option called "Tenancy". What is it used for?</summary><br><b>
 
-[AWS Docs](https://docs.aws.amazon.com/vpc/latest/userguide/create-vpc.html): `Tenancy` option defines if EC2 instances that you launch into the VPC will run on hardware that's shared with other AWS accounts or on hardware that's dedicated for your use only. 
+[AWS Docs](https://docs.aws.amazon.com/vpc/latest/userguide/create-vpc.html): When creating a new Amazon VPC, you will see an option called "Tenancy". This setting determines whether your EC2 instances will run on shared or dedicated physical hardware.
 </b></details>
 
 <details>
