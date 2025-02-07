@@ -116,20 +116,17 @@ Sandbox is a generic term that refers to OS specific technologies used to isolat
 
 Docker’s networking subsystem is pluggable using drivers. Several drivers exist by default, and provide core networking functionality. Below is the snapshot of difference of various Docker networking drivers.
 
- 
-
-
-
 Below are details of Docker networking drivers:
-Bridge: The default network driver. If you don’t specify a driver, this is the type of network you are creating. Bridge networks are usually used when your applications run in standalone containers that need to communicate. 
 
-Host: For standalone containers, remove network isolation between the container and the Docker host, and use the host’s networking directly. host is only available for swarm services on Docker 17.06 and higher. 
+**Bridge:** The default network driver. If you don’t specify a driver, this is the type of network you are creating. Bridge networks are usually used when your applications run in standalone containers that need to communicate. 
 
-Overlay: Overlay networks connect multiple Docker daemons together and enable swarm services to communicate with each other. You can also use overlay networks to facilitate communication between a swarm service and a standalone container, or between two standalone containers on different Docker daemons. This strategy removes the need to do OS-level routing between these containers. See overlay networks.
+**Host:** For standalone containers, remove network isolation between the container and the Docker host, and use the host’s networking directly. host is only available for swarm services on Docker 17.06 and higher. 
 
-MacVLAN: Macvlan networks allow you to assign a MAC address to a container, making it appear as a physical device on your network. The Docker daemon routes traffic to containers by their MAC addresses. Using the macvlan driver is sometimes the best choice when dealing with legacy applications that expect to be directly connected to the physical network, rather than routed through the Docker host’s network stack. 
+**Overlay:** Overlay networks connect multiple Docker daemons together and enable swarm services to communicate with each other. You can also use overlay networks to facilitate communication between a swarm service and a standalone container, or between two standalone containers on different Docker daemons. This strategy removes the need to do OS-level routing between these containers. See overlay networks.
 
-None: For this container, disable all networking. Usually used in conjunction with a custom network driver. none is not available for swarm services. 
+**MacVLAN:** Macvlan networks allow you to assign a MAC address to a container, making it appear as a physical device on your network. The Docker daemon routes traffic to containers by their MAC addresses. Using the macvlan driver is sometimes the best choice when dealing with legacy applications that expect to be directly connected to the physical network, rather than routed through the Docker host’s network stack. 
+
+**None:** For this container, disable all networking. Usually used in conjunction with a custom network driver. none is not available for swarm services. 
 
 
 # What features are possible only under Docker Enterprise Edition in comparison to Docker Community Edition?
@@ -203,7 +200,9 @@ Yes.
 ![img](https://raw.githubusercontent.com/collabnix/dockerlabs/master/docker/img/docker-interview-13.png)
  
 Bridge networks connect two networks while creating a single aggregate network from multiple communication networks or network segments, hence the name bridge.
+
 Overlay networks are usually used to create a virtual network between two separate hosts. Virtual, since the network is build over an existing network.
+
 Bridge networks can cater to single host, while overlay networks are for multiple hosts.
 
 26. What networks are affected when you join a Docker host to an existing Swarm?
@@ -246,13 +245,20 @@ Docker Swarm is native clustering for Docker. It turns a pool of Docker hosts in
 
 
 # What is `--memory-swap` flag?
-`--memory-swap` is a modifier flag that only has meaning if `--memory `is also set. Using swap allows the container to write excess memory requirements to disk when the container has exhausted all the RAM that is available to it. There is a performance penalty for applications that swap memory to disk often.
-
+The ```--memory-swap``` flag is used when running Docker containers to control swap memory usage. It works along with the ```--memory flag```, which sets the container’s RAM limit.
 # Can you explain different volume mount types  available in Docker?
 There are three mount types available in Docker   	
-· Volumes are stored in a part of the host filesystem which is managed by Docker (`/var/lib/docker/volumes/` on Linux). Non-Docker processes should not modify this part of the filesystem. Volumes are the best way to persist data in Docker.
-·  Bind mounts may be stored anywhere on the host system. They may even be important system files or directories. Non-Docker processes on the Docker host or a Docker container can modify them at any time.
-·   tmpfs mounts are stored in the host system’s memory only, and are never written to the host system’s filesystem.
+1. Volumes are stored in a part of the host filesystem which is managed by Docker (`/var/lib/docker/volumes/` on Linux). Non-Docker processes should not modify this part of the filesystem. Volumes are the best way to persist data in Docker.
+
+2. Bind mounts may be stored anywhere on the host system. They may even be important system files or directories. Non-Docker processes on the Docker host or a Docker container can modify them at any time.
+  
+4. tmpfs mounts are stored in the host system’s memory only, and are never written to the host system’s filesystem.
+   
+   Volumes → Persistent storage, Docker-managed, best for databases.
+   
+   Bind Mounts → Direct file access, good for development.
+   
+   tmpfs → RAM-based, super fast but temporary.
  
 #  How to share data among DockerHost?
 Ways to achieve this when developing your applications. One is to add logic to your application to store files on a cloud object storage system like Amazon S3. Another is to create volumes with a driver that supports writing files to an external storage system like NFS or Amazon S3.
@@ -282,6 +288,54 @@ You can build your images automatically from a build context stored in a reposit
 
 To configure the Docker daemon to default to a specific logging driver, set the value of log-driver to the name of the logging driver in the daemon.json file, which is located in /etc/docker/ on Linux hosts or C:\ProgramData\docker\config\ on Windows server hosts. The default logging driver is json-file.
 
+# Write a sample DockerFile
+1. **Dockerfile for a Python Flask Application**
+```
+# Use the official Python image from the Docker Hub
+FROM python:3.9-slim
+
+# Set the working directory in the container
+WORKDIR /app
+
+# Copy the requirements file into the container
+COPY requirements.txt .
+
+# Install the required Python packages
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy the rest of the application code into the container
+COPY . .
+
+# Expose the port the app runs on
+EXPOSE 5000
+
+# Define the command to run the application
+CMD ["python", "app.py"]
+```
+2. **Dockerfile for a Node.js Application**
+```
+# Use the official Node.js image from the Docker Hub
+FROM node:14
+
+# Set the working directory in the container
+WORKDIR /usr/src/app
+
+# Copy package.json and package-lock.json into the container
+COPY package*.json ./
+
+# Install the required Node.js packages
+RUN npm install
+
+# Copy the rest of the application code into the container
+COPY . .
+
+# Expose the port the app runs on
+EXPOSE 8080
+
+# Define the command to run the application
+CMD ["node", "server.js"]
+```
+
 
 # Why do my services take 10 seconds to recreate or stop?
 
@@ -293,10 +347,12 @@ Compose uses the project name to create unique identifiers for all of a project�
 
 # What’s the difference between up, run, and start under Docker Compose?
 
-Typically, you want docker-compose up. Use up to start or restart all the services defined in a docker-compose.yml. In the default “attached” mode, you see all the logs from all the containers. In “detached” mode (-d), Compose exits after starting the containers, but the containers continue to run in the background.
+| Command                     | What It Does                                                   | When to Use                                            |
+|-----------------------------|--------------------------------------------------------------|-------------------------------------------------------|
+| `docker-compose up`         | Starts all services in the `docker-compose.yml` file. Creates containers if they don’t exist. | When you want to start the full application.         |
+| `docker-compose run <service>` | Starts a single service in the foreground, without starting other services. | When you need to run one-off tasks (e.g., migrations, debugging). |
+| `docker-compose start`      | Starts stopped containers but doesn’t recreate them.        | When you want to restart existing containers without making changes. |
 
-The docker-compose run command is for running “one-off” or “adhoc” tasks. It requires the service name you want to run and only starts containers for services that the running service depends on. Use run to run tests or perform an administrative task such as removing or adding data to a data volume container. The run command acts like docker run -ti in that it opens an interactive terminal to the container and returns an exit status matching the exit status of the process in the container.
-The docker-compose start command is useful only to restart containers that were previously created, but were stopped. It never creates new containers.
 
 #  What is Docker Trusted Registry?
 Docker Trusted Registry (DTR) is the enterprise-grade image storage solution from Docker. You install it behind your firewall so that you can securely store and manage the Docker images you use in your applications.
