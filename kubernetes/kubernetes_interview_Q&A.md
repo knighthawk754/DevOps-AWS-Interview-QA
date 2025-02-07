@@ -74,11 +74,31 @@
 
 #### 5. What is the difference between Ingress and Ingress Controller:
 
-    Answer: Ingress Controller FULFILLS ingress requirements
-            Defining and ingress has no actual impact on traffic.
-            Traffic is only acted upon once you have created an Ingress Controller (e.g. Load Balancer or Nginx Ingress Controller)
+# Difference Between Ingress and Ingress Controller
 
-## .
+| Component           | Description |
+|--------------------|-------------|
+| **Ingress** | A Kubernetes API object that defines routing rules for external HTTP/S traffic to services inside the cluster. It specifies **what** traffic should be allowed and how it should be routed. |
+| **Ingress Controller** | A component that **implements** the Ingress rules by managing an actual proxy/load balancer (e.g., NGINX, Traefik, AWS ALB). It **enforces** the rules defined in the Ingress resource. |
+
+## 🔹 Summary:
+- **Ingress** = Defines rules for external traffic.
+- **Ingress Controller** = Enforces and processes those rules.
+- Without an **Ingress Controller**, an **Ingress resource** alone does nothing.
+
+
+## .what is kubernates ingress and what is kubernates endpoints
+# Kubernetes Ingress vs. Kubernetes Endpoints
+
+| Component           | Description |
+|---------------------|-------------|
+| **Kubernetes Ingress**  | An API object that manages external HTTP/S access to services within a Kubernetes cluster. It provides **routing rules** to control how incoming requests are directed to various services (e.g., path-based or subdomain-based routing). |
+| **Kubernetes Endpoints** | An object that lists the **IP addresses and ports** of the Pods that are associated with a Kubernetes Service. It directly maps services to the running Pods. |
+
+## 🔹 Summary:
+- **Ingress** = Manages external traffic to services.
+- **Endpoints** = Maps services to Pod IPs and ports.
+
 
 
 ## .....
@@ -167,8 +187,7 @@
 
       a. hpa for pods (horizontal pod autoscaler)
       b. vpa for pods (vertical pod autoscaler)
-      c. Cluster Autoscaler:
-           The cluster autoscaler is a Kubernetes tool that increases or decreases the size of a Kubernetes cluster (by adding or removing nodes), based on the presence of pending pods and node utilization metrics
+      c. Cluster Autoscaler
 
 ## .
 
