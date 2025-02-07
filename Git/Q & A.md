@@ -12,19 +12,15 @@ You can check if there is a ".git" directory.
 <summary>Explain the following: <code>git directory</code>, <code>working directory</code> and <code>staging area</code></summary><br>
 <b>
 
-This answer taken from [git-scm.com](https://git-scm.com/book/en/v1/Getting-Started-Git-Basics#_the_three_states)
+Think of Git like writing a book.
 
-"The Git directory is where Git stores the meta-data and object database for your project. This is the most important
-part of Git, and it is what is copied when you clone a repository from another computer.
-
-The working directory is a single checkout of one version of the project. These files are pulled out of the compressed
-database in the Git directory and placed on disk for you to use or modify.
-
-The staging area is a simple file, generally contained in your Git directory, that stores information about what will go
-into your next commit. It’s sometimes referred to as the index, but it’s becoming standard to refer to it as the staging
-area."
-</b>
-</details>
+1.Git Directory (Repository): This is like your library where all versions of your book (project) are stored safely. It contains the full history of changes.
+2.Working Directory: This is like your desk where you are currently writing or editing the book. It contains the latest files you are working on.
+3.Staging Area: This is like a clipboard where you select pages (files) that are ready to be published in the next version of the book.
+## How they work together:
+You edit files in the Working Directory.
+You add them to the Staging Area when you are happy with the changes (git add).
+You save them permanently in the Git Directory when you commit (git commit).
 
 <details>
 <summary>What is the difference between <code>git pull</code> and <code>git fetch</code>?</summary><br><b>
