@@ -1412,10 +1412,23 @@ More on Storage Gateway [here](https://aws.amazon.com/storagegateway)
 
   * File Gateway
   * Volume Gateway
-  * Tape Gateway</summary><br><b>
+  * Tape Gateway</summary><br><b></b>
 
-Explained in detail [here](https://aws.amazon.com/storagegateway/faqs)
-</b></details>
+Quick Comparison Table:
+
+**File Gateway** : Object Storage (S3):		File sharing, backup, archiving
+
+**Volume Gateway**: Block Storage (EBS) 	Extending local storage, disaster recovery
+
+**Tape Gateway**   Virtual Tape (Glacier)   Replacing tape backups, long-term archiving
+
+🚀 Summary:
+
+File Gateway → For working with files in S3
+Volume Gateway → For block storage like virtual disks.
+Tape Gateway → For replacing old-school tape backups.
+
+</details>
 
 <details>
 <summary>What is the difference between stored volumes and cached volumes?</summary><br><b>
