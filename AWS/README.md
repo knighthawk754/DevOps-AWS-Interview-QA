@@ -1515,6 +1515,13 @@ Summary:
 <summary>What delivery methods available for the user with CDN?</summary><br><b>
 </b></details>
 
+1. **Push CDN (Proactive Upload 📤)**
+The user uploads content to the CDN in advance. The CDN stores and serves the content directly from its edge locations. Content is always available, reducing the need to fetch from the origin.
+
+
+2. **Pull CDN (On-Demand Fetching 📥)**
+Content is fetched from the origin server only when requested. The CDN caches content at edge locations for future requests. New requests that miss the cache go to the origin, adding latency.
+
 <details>
 <summary>True or False?. Objects are cached for the life of TTL</summary><br><b>
 
