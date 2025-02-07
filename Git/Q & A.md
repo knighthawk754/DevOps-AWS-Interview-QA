@@ -223,17 +223,40 @@ Finally, you run `git rebase --continue`
 </b></details>
 
 <details>
-<summary>What merge strategies are you familiar with?</summary><br><b>
+<summary>What merge strategies are you familiar with?</summary><br><b> </b>
 
-Mentioning two or three should be enough and it's probably good to mention that 'recursive' is the default one.
+Here are two main merge strategies in Git:
 
-recursive
-resolve
-ours
-theirs
+1️⃣ **Fast-Forward Merge (git merge)**
+
+Happens when the target branch has no new commits since the source branch was created.
+Git just moves the branch pointer forward to the new commit.
+No extra merge commit is created.
+```
+Example:
+git checkout main
+git merge feature-branch
+```
+Best for: Simple changes, keeping history clean.
+
+2️⃣ **Three-Way Merge (git merge --no-ff)**
+
+Happens when both branches have diverged (i.e., both have new commits).Git creates a new merge commit that combines the changes. Maintains a clear history of merges.
+```
+Example:
+git checkout main
+git merge --no-ff feature-branch
+```
+Best for: Team collaboration, keeping track of merges.
+
+### Other Merge Strategies:
+
+1. **Squash Merge (git merge --squash)** → Combines all commits from the branch into a single commit before merging.
+2. **Rebase Merge (git rebase)** → Moves the feature branch commits on top of the latest main branch to keep history linear.
+3. **Octopus Merge** → Used for merging multiple branches at once (rarely used).
 
 This page explains it the best: https://git-scm.com/docs/merge-strategies
-</b></details>
+</details>
 
 <details>
 <summary>Explain Git octopus merge</summary><br><b>
